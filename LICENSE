@@ -1,0 +1,171 @@
+GLACIEREQ PROPRIETARY LICENSE
+Version 1.1 — August 2026
+(Public surface · commercial reserve · diligence-friendly)
+
+Copyright (c) 2026 Casey del Carpio Barton / GlacierEQ. All rights reserved.
+
+NOTICE: This software, documentation, catalogs, schemas, classification systems,
+workflows, and associated files (collectively, the "Software") are the proprietary
+property of GlacierEQ. This License is not a sale. It conveys only the limited
+rights expressly granted below.
+
+This repository is published publicly so commercial leaders, engineers, and
+hiring reviewers may inspect GlacierEQ systems work. Public visibility is an act
+of professional pride and verification — not a grant of commercial rights, not a
+waiver of ownership, and not open source.
+
+-----------------------------------------------------------------------------
+1. DEFINITIONS
+
+  "You" means any person or entity exercising rights under this License.
+
+  "Derivative Work" means any work based on or derived from the Software,
+  including translations, annotations, modifications, extensions, configurations,
+  integrations, rehostings, or any work that incorporates substantial portions
+  of the Software's expression.
+
+  "Public Surface" means materials intentionally published in this repository
+  for inspection, verification, and professional evaluation.
+
+  "Integrity Materials" means contents under `.integrity/` (or legacy `.shadow/`
+  operator layers), including operator-only state, unreleased doctrine, commercial
+  terms, release authority material, and non-public provenance — whether or not a
+  particular file is present in a given clone.
+
+-----------------------------------------------------------------------------
+2. GRANT OF LICENSE (LIMITED)
+
+  Subject to this License, GlacierEQ grants You a limited, non-exclusive,
+  non-transferable, revocable license to:
+
+  (a) View, clone, and read the Public Surface;
+
+  (b) Use the Public Surface for personal evaluation, academic study, and
+      employment or commercial due diligence (including hiring review);
+
+  (c) Fork the Public Surface solely for the purposes in (b), without
+      redistribution as a product or service;
+
+  (d) Create temporary local notes or excerpts strictly as needed for (b),
+      provided GlacierEQ authorship and this License remain attributed;
+
+  (e) Copy the Public Surface for personal backup and archival.
+
+  No other rights are granted by implication, estoppel, or otherwise.
+
+-----------------------------------------------------------------------------
+3. RESTRICTIONS
+
+  You SHALL NOT, without a separate written commercial license from GlacierEQ:
+
+  (a) Distribute, publish, sublicense, sell, rent, lease, mirror, or otherwise
+      make the Software (or a substantial portion of its expression) available
+      to third parties as a product, dataset, service, or competing work;
+
+  (b) Use the Software to provide hosted, consulting, managed, or SaaS services
+      to third parties that substantially reproduce the Software's value;
+
+  (c) Remove, alter, or obscure proprietary notices, license text, attribution,
+      watermark markers, or integrity manifests;
+
+  (d) Claim ownership of the Software or any Derivative Work, or present the
+      Software as originating from You or Your organization;
+
+  (e) Integrate the Software (or substantial Derivative Works) into commercial
+      products, internal production platforms, or startup offerings;
+
+  (f) Access, exfiltrate, or rely on Integrity Materials except as an authorized
+      GlacierEQ collaborator under separate terms;
+
+  (g) Use the Software in any manner that violates applicable law.
+
+  Reverse engineering restrictions apply only to the extent permitted by law
+  and only to non-public compilation artifacts if any; the Public Surface is
+  already source-form for inspection under §2.
+
+-----------------------------------------------------------------------------
+4. INTELLECTUAL PROPERTY
+
+  The Software and all intellectual property rights therein remain the exclusive
+  property of GlacierEQ / Casey del Carpio Barton. No title or ownership is
+  transferred under this License.
+
+  Public disclosure of the Public Surface is intended to establish dated public
+  evidence of authorship and expression. It does not grant patent rights, does
+  not waive rights in unpublished materials, and does not authorize commercial
+  pattern harvesting of the Software's expression into competing products.
+
+-----------------------------------------------------------------------------
+5. PUBLIC SURFACE vs CONFIDENTIALITY
+
+  The Public Surface is intentionally visible. Do not treat "proprietary"
+  as a claim that published files are trade secrets after public release.
+
+  Confidentiality obligations attach to:
+
+  (a) Integrity Materials;
+  (b) Non-public communications, commercial terms, and collaborator access;
+  (c) Any materials GlacierEQ marks confidential in writing.
+
+  You must protect such materials with at least reasonable care.
+
+-----------------------------------------------------------------------------
+6. WATERMARKS & INTEGRITY (EVIDENTIARY)
+
+  The Software may contain intentional structural markers, naming conventions,
+  integrity manifests, and idiosyncratic strings. Their presence in unauthorized
+  copies may be used as evidence of derivation. This is an evidentiary aid, not
+  a substitute for independent proof of infringement.
+
+-----------------------------------------------------------------------------
+7. TERMINATION
+
+  This License continues until terminated. Rights terminate automatically upon
+  breach. Upon termination, You must cease use beyond personal archival of
+  lawfully obtained Public Surface copies that retain this License notice, and
+  destroy Integrity Materials and unauthorized Derivative Works.
+
+-----------------------------------------------------------------------------
+8. DISCLAIMER OF WARRANTIES
+
+  THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+  NON-INFRINGEMENT. GLACIEREQ DOES NOT WARRANT THAT THE SOFTWARE WILL MEET
+  YOUR REQUIREMENTS OR OPERATE WITHOUT INTERRUPTION OR ERROR.
+
+-----------------------------------------------------------------------------
+9. LIMITATION OF LIABILITY
+
+  IN NO EVENT SHALL GLACIEREQ BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+  CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE, REGARDLESS OF THEORY OF LIABILITY, TO THE MAXIMUM EXTENT PERMITTED
+  BY LAW.
+
+-----------------------------------------------------------------------------
+10. GOVERNING LAW & VENUE
+
+  This License is governed by the laws of the State of Hawaii, without regard
+  to conflict-of-laws principles. Exclusive venue lies in the state or federal
+  courts located in Hawaii, unless GlacierEQ elects otherwise in writing for
+  a particular enforcement action.
+
+-----------------------------------------------------------------------------
+11. ENTIRE AGREEMENT
+
+  This License is the entire agreement regarding the Software's Public Surface
+  and supersedes prior or contemporaneous communications on that subject.
+  Commercial licenses, NDAs, and collaborator agreements control if executed.
+
+-----------------------------------------------------------------------------
+12. CONTACT
+
+  Licensing and collaborator inquiries: glacier.equilibrium@gmail.com
+  Organization: https://github.com/GlacierEQ
+
+-----------------------------------------------------------------------------
+By cloning, viewing, using, or forking this repository, You acknowledge that
+You have read and agree to this License. If You do not agree, do not use the
+Software.
+
+"Passion on the public surface. Rights reserved where they matter."
+"Mastermind integrity team: public verify · private authority."
