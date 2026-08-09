@@ -29,3 +29,7 @@ python3 -m src.dual_key_fence
 ## Status
 
 Wave 1 excellence seed · 2026-08-09T04:26Z
+
+## Quality honesty
+
+See [QUALITY.md](./QUALITY.md). This is a leveled **reference mechanism**, not a production system or employer affiliation claim.
