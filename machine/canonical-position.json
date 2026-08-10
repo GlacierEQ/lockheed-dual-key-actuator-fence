@@ -1,0 +1,68 @@
+{
+  "schema": "glaciereq.repo-canonical-position.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "position_state": "RESOLVED",
+  "role": "company_specific_specialist_system",
+  "company_target": "Lockheed Martin",
+  "canonical_identity": "dual-key-actuator-fence",
+  "unique_value": [
+    "policy decision authority is separated from side-effect execution authority so neither plane can act alone",
+    "short-lived MAC-bound actuator grants are cryptographically bound to the exact policy decision fingerprint and input digest",
+    "execution is fail-closed on policy refusal, missing or invalid grants, expiry, clock-window mismatch, decision drift, input drift, and replay",
+    "successful and refused executions produce deterministic receipts while a shared hash-chained audit log detects in-place history tampering"
+  ],
+  "lineage_distinction": {
+    "GlacierEQ/lockheed-evidence-binding-gateway": "binds external actions to content-addressed evidence snapshots; complementary evidence provenance, not actuator authority",
+    "GlacierEQ/lockheed-mission-thread-isolator": "isolates mutable authority between mission threads; complementary isolation boundary, not dual-key side-effect authorization"
+  },
+  "capability_contribution": {
+    "family": "dual_control_side_effect_authority",
+    "extractable_mechanisms": [
+      "policy-execution authority separation",
+      "decision-bound short-lived actuator grants",
+      "input-digest drift refusal",
+      "single-use grant replay refusal",
+      "tamper-evident execution audit",
+      "deterministic execution receipts"
+    ],
+    "ownership": "This repository remains the owning Lockheed-specialist implementation of dual-control side-effect authority; capability extraction preserves repository identity and lineage."
+  },
+  "integration_policy": {
+    "preserve_repository_identity": true,
+    "preserve_lineage": true,
+    "presentation_independent": true,
+    "size_or_loc_not_dispositive": true,
+    "absorption_requires_functional_equivalence": true,
+    "absorption_requires_proof_equivalence": true
+  },
+  "relationships": [
+    {
+      "repository": "GlacierEQ/lockheed-evidence-binding-gateway",
+      "kind": "COMPLEMENTARY_ASSURANCE_COMPONENT",
+      "integration_state": "NOT_CLAIMED"
+    },
+    {
+      "repository": "GlacierEQ/lockheed-mission-thread-isolator",
+      "kind": "COMPLEMENTARY_AUTHORITY_ISOLATION_COMPONENT",
+      "integration_state": "NOT_CLAIMED"
+    }
+  ],
+  "next_evolution": "Add attenuating multi-principal/quorum grant issuance, hardware-backed signer boundaries, and explicit side-effect confirmation/reconciliation while preserving exact decision/input binding and single-use fail-closed semantics.",
+  "evidence_refs": [
+    "README.md",
+    "ISSUE_CONTRACT.md",
+    "src/dual_key_fence.py",
+    "tests/test_dual_key_fence.py",
+    "tests/test_adversarial.py",
+    "machine/target-contract.json",
+    "machine/proof_receipt.json",
+    "machine/operability_receipt.json",
+    "machine/promotion_authority.json"
+  ],
+  "nonclaims": [
+    "no Lockheed Martin affiliation",
+    "no Lockheed Martin internal architecture claim",
+    "not a production actuator-control deployment",
+    "repository relationships do not imply exercised integration"
+  ]
+}
