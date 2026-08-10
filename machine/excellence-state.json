@@ -5,66 +5,71 @@
   "gates": {
     "IDENTITY_RESOLVED": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "github GlacierEQ/lockheed-dual-key-actuator-fence"
     },
     "PROBLEM_VERIFIED": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "README/ISSUE_CONTRACT problem bound"
     },
     "TARGET_CONTRACT_FROZEN": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "machine/target-contract.json"
     },
     "DONOR_PLAN_RESOLVED": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "elite bar seed; donor_reuse=none"
     },
     "VERTICAL_SLICE_ALIVE": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "src mechanism + scripts/operate.py"
     },
     "CENTRAL_MECHANISM_PRESENT": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "central mechanism in src/"
     },
     "DETERMINISTIC_PROOF_GREEN": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "dual-run green tests"
     },
     "ADVERSARIAL_SURVIVAL": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "tests/test_adversarial.py"
     },
     "OPERABLE_AND_OBSERVABLE": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "scripts/operate.py dual-run PASS; primary ok"
     },
     "PROOF_RECEIPT_BOUND": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "machine/proof_receipt.json bound"
     },
     "AUTHORITY_BOUND": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "evidence": "promotion_authority.json local HMAC grant"
+    },
+    "PROJECTION_TRUTH_CLOSED": {
+      "status": "PASS",
+      "at": "2026-08-10T06:25Z",
+      "evidence": "proof=da8cee94da857d45; authority=956f02cc3c45c599; operability=4211c7454a5d7f89; claim_ceiling=leaf-native; nonclaims=non_affiliation_preserved; projection_role=monolith_projection_only; readback=operate_content_checked+validator_PASS"
     },
     "CANONICAL_POSITION_RESOLVED": {
       "status": "PENDING"
     },
     "EVOLUTION_CURSOR_DEFINED": {
       "status": "PASS",
-      "at": "2026-08-10T06:12Z",
-      "evidence": "legal continuous history; cursor after PROMOTED"
+      "at": "2026-08-10T06:25Z",
+      "evidence": "next:canonical_position_only_if_estate_role_resolved"
     },
     "problem_verified": true,
     "unique_value_known": true,
@@ -81,7 +86,7 @@
   },
   "history": [
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "DISCOVERED",
       "to": "IDENTITY_RESOLVED",
       "gate": "IDENTITY_RESOLVED",
@@ -89,7 +94,7 @@
       "note": "github GlacierEQ/lockheed-dual-key-actuator-fence"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "IDENTITY_RESOLVED",
       "to": "PROBLEM_VERIFIED",
       "gate": "PROBLEM_VERIFIED",
@@ -97,7 +102,7 @@
       "note": "README/ISSUE_CONTRACT problem bound"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "PROBLEM_VERIFIED",
       "to": "TARGET_CONTRACTED",
       "gate": "TARGET_CONTRACT_FROZEN",
@@ -105,7 +110,7 @@
       "note": "machine/target-contract.json"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "TARGET_CONTRACTED",
       "to": "SEEDED",
       "gate": "DONOR_PLAN_RESOLVED",
@@ -113,7 +118,7 @@
       "note": "elite bar seed; donor_reuse=none"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "SEEDED",
       "to": "VERTICAL_SLICE",
       "gate": "VERTICAL_SLICE_ALIVE",
@@ -121,7 +126,7 @@
       "note": "src mechanism + scripts/operate.py"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "VERTICAL_SLICE",
       "to": "IMPLEMENTED",
       "gate": "CENTRAL_MECHANISM_PRESENT",
@@ -129,7 +134,7 @@
       "note": "central mechanism in src/"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "IMPLEMENTED",
       "to": "TESTED",
       "gate": "DETERMINISTIC_PROOF_GREEN",
@@ -137,7 +142,7 @@
       "note": "dual-run green tests"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "TESTED",
       "to": "ADVERSARIAL_VERIFIED",
       "gate": "ADVERSARIAL_SURVIVAL",
@@ -145,7 +150,7 @@
       "note": "tests/test_adversarial.py"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "ADVERSARIAL_VERIFIED",
       "to": "OPERABLE",
       "gate": "OPERABLE_AND_OBSERVABLE",
@@ -153,7 +158,7 @@
       "note": "scripts/operate.py dual-run PASS; primary ok"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "OPERABLE",
       "to": "PROOF_REPRODUCED",
       "gate": "PROOF_RECEIPT_BOUND",
@@ -161,12 +166,12 @@
       "note": "machine/proof_receipt.json bound"
     },
     {
-      "at": "2026-08-10T06:12Z",
+      "at": "2026-08-10T06:25Z",
       "from": "PROOF_REPRODUCED",
       "to": "PROMOTED",
       "gate": "AUTHORITY_BOUND",
       "result": "PASS",
-      "note": "promotion_authority.json local HMAC grant"
+      "note": "promotion_authority + PROJECTION_TRUTH_CLOSED"
     }
   ],
   "contract_ref": "machine/target-contract.json",
@@ -179,7 +184,9 @@
     "migrated_at": "2026-08-10T05:56Z",
     "from_schema": "glaciereq.repo-excellence.record.v1",
     "history_repaired_at": "2026-08-10T06:12Z",
-    "history_source": "monolith-legal-hops"
+    "history_source": "monolith-legal-hops",
+    "projection_truth_closed_at": "2026-08-10T06:25Z",
+    "policy": "glaciereq.repo-excellence.promotion-policy.v1"
   },
   "state": "PROMOTED",
   "proof_receipt": {
