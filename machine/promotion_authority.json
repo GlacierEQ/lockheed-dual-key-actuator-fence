@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "source_sha": "80732daaf2288db1f18df4b4dfb3fcd339cfd97e4ad3f5bdbb391630931f4b7c",
+  "proof_receipt_digest": "da8cee94da857d45add77362f22d37f893363e74dd6f172b4558afe971ff196e",
+  "not_after": 1788927149.234226,
+  "mac": "1b9f69072dbb82f9bc66289db6c0709adee3cf279ab0de71a7379dc8801e9999",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}

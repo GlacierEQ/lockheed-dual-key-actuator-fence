@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.proof-receipt.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "source_sha": "80732daaf2288db1f18df4b4dfb3fcd339cfd97e4ad3f5bdbb391630931f4b7c",
+  "proof_id": "elite-lockheed-dual-key-actuator-fence-1786335149",
+  "environment": {
+    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "/Users/kcbflux/job-app/repos/lockheed-dual-key-actuator-fence:/Users/kcbflux/job-app/repos/lockheed-dual-key-actuator-fence/src",
+    "entry": "unittest"
+  },
+  "tests": [
+    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
+  ],
+  "adversarial_tests": [
+    "tests/test_adversarial.py"
+  ],
+  "runtime": {
+    "operate": "scripts/operate.py (x2)",
+    "dual_run_ok": true,
+    "proof_dual_run_ok": true
+  },
+  "result": "PASS",
+  "limitations": [
+    "not production deployed",
+    "reference implementation only"
+  ],
+  "timestamp": "2026-08-10T04:12Z",
+  "artifact_hashes": {
+    "operability_receipt": "4211c7454a5d7f89e857de25e13456eca0a8273efaf241e20185662bd0d0e9fe"
+  }
+}

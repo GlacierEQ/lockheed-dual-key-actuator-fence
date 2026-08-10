@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "80732daaf2288db1f18df4b4dfb3fcd339cfd97e4ad3f5bdbb391630931f4b7c",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "dual_key_fence",
+    "ok": true,
+    "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+    "smoke": {
+      "args": [
+        "'sample_policy_hash'",
+        "<function _sample_args.<locals>.<lambda>",
+        "b'elite-operate-secret'"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "fn",
+      "name": "build_stack",
+      "result": [
+        "<dual_key_fence.PolicyBrain object at 0x102d32050>",
+        "<dual_key_fence.GrantIssuer object at 0x102d31ed0>",
+        "<dual_key_fence.ActuatorMuscle object at 0x102d32110>",
+        "<dual_key_fence.AuditLog object at 0x102d31b10>"
+      ]
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}
