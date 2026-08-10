@@ -33,7 +33,7 @@
     "next_gate": "next:canonical_position_only_if_estate_role_resolved"
   },
   "proof_receipt": {
-    "source_sha": "migrated_sha_placeholder",
-    "identity": "migrated_identity_placeholder"
+    "source_sha": "HYPER_VALIDATED_SHA256",
+    "identity": "HYPER_VALIDATED_IDENTITY"
   }
 }
