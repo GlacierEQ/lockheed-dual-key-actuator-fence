@@ -1,1 +1,22 @@
-{"capabilities": ["hyper-scaling"]}
+{
+  "schema": "glaciereq.repo-capabilities.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "capability_family": "dual_control_side_effect_authority",
+  "capabilities": [
+    "policy-execution-authority-separation",
+    "decision-bound-short-lived-actuator-grants",
+    "actuator-grant-MAC-integrity",
+    "input-digest-drift-refusal",
+    "single-use-grant-replay-refusal",
+    "tamper-evident-execution-audit",
+    "deterministic-execution-receipts"
+  ],
+  "evidence_refs": [
+    "src/dual_key_fence.py",
+    "tests/test_dual_key_fence.py",
+    "tests/test_adversarial.py",
+    "machine/proof_receipt.json",
+    "machine/canonical-position.json"
+  ],
+  "truth_boundary": "Repository-local dual-control authority mechanisms only. No Lockheed Martin adoption, production actuator deployment, or exercised integration with sibling repositories is implied."
+}
