@@ -1,0 +1,6 @@
+{
+  "linked_to": "APEX-OMNI-NEXUS-01",
+  "status": "ACTIVE",
+  "capabilities": ["flash_swarm_ready", "throughput_maximized"],
+  "orchestrator": "Operator-Is-The-Universe"
+}
