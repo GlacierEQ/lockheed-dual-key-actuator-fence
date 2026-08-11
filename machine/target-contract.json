@@ -5,18 +5,43 @@
     "family": "elite-estate"
   },
   "current": {
-    "state": "PROMOTED",
+    "state": "EVOLVING",
     "implemented": true,
     "tested": true,
     "deployed": false
   },
+  "mechanism": {
+    "legacy_surface": "single-issuer dual-key decision-bound actuator grant remains backward compatible",
+    "quorum_surface": "distinct-principal scoped quorum grant with signer-provider verification and provider-confirmation reconciliation",
+    "authority_bounds": [
+      "requested effects must be a subset of policy-decision maximum authority",
+      "requested effects must be a subset of every participating principal policy and approval",
+      "required roles and distinct-principal quorum must both hold",
+      "provider confirmation must be current and CONFIRMED at grant issuance",
+      "hardware-backed principal policy requires provider descriptor metadata declaring hardware_backed",
+      "execution remains decision input effect MAC expiry and single-use bound"
+    ]
+  },
+  "proof": {
+    "consumed_cursor": "next:attenuating_multi_principal_quorum_hardware_backed_signers_provider_confirmation_reconciliation",
+    "candidate_source_sha": "ec2d6688a44018edd712a98be447bf78f5a55699",
+    "workflow_run": 31541877337,
+    "python": "PASS",
+    "receipt": "machine/evolution-receipts/2026-08-11-multi-principal-quorum.json"
+  },
+  "next_cursor": "next:externally_attested_hardware_provenance_signer_key_revocation_freshness_restart_safe_quorum_state_and_external_side_effect_confirmation_reconciliation",
   "nonclaims": [
-    "no employer affiliation",
-    "no production deployment without receipt"
+    "no Lockheed Martin affiliation",
+    "no production actuator deployment without receipt",
+    "no independently attested physical HSM TPM or secure-enclave provenance",
+    "no external side-effect provider confirmation reconciliation yet",
+    "no restart-safe or distributed quorum state yet",
+    "no proprietary access or internal architecture knowledge"
   ],
   "donor_plan": {
     "mode": "none",
     "donors": []
   },
-  "frozen_at": "2026-08-10T04:12Z"
+  "frozen_at": "2026-08-10T04:12Z",
+  "refreshed_at": "2026-08-11T22:20Z"
 }

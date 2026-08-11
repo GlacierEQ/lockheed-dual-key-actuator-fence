@@ -7,9 +7,12 @@
   "canonical_identity": "dual-key-actuator-fence",
   "unique_value": [
     "policy decision authority is separated from side-effect execution authority so neither plane can act alone",
-    "short-lived MAC-bound actuator grants are cryptographically bound to the exact policy decision fingerprint and input digest",
-    "execution is fail-closed on policy refusal, missing or invalid grants, expiry, clock-window mismatch, decision drift, input drift, and replay",
-    "successful and refused executions produce deterministic receipts while a shared hash-chained audit log detects in-place history tampering"
+    "short-lived grants are cryptographically bound to the exact policy decision fingerprint and input digest",
+    "execution is fail-closed on policy refusal missing or invalid grants expiry decision drift input drift effect-scope expansion and replay",
+    "successful and refused executions produce deterministic receipts while a shared hash-chained audit log detects in-place history tampering",
+    "multi-principal quorum requires distinct principals and required roles rather than counting duplicate signatures",
+    "effect authority can attenuate through policy principal approval and grant stages but cannot expand",
+    "signer signatures are reverified and current provider confirmations are reconciled before quorum issuance"
   ],
   "lineage_distinction": {
     "GlacierEQ/lockheed-evidence-binding-gateway": "binds external actions to content-addressed evidence snapshots; complementary evidence provenance, not actuator authority",
@@ -23,7 +26,12 @@
       "input-digest drift refusal",
       "single-use grant replay refusal",
       "tamper-evident execution audit",
-      "deterministic execution receipts"
+      "deterministic execution receipts",
+      "distinct-principal required-role quorum",
+      "effect-scope attenuation",
+      "signer-provider verification boundary",
+      "provider-confirmation reconciliation",
+      "provider-metadata hardware-backed signer policy"
     ],
     "ownership": "This repository remains the owning Lockheed-specialist implementation of dual-control side-effect authority; capability extraction preserves repository identity and lineage."
   },
@@ -47,14 +55,23 @@
       "integration_state": "NOT_CLAIMED"
     }
   ],
-  "next_evolution": "Add attenuating multi-principal/quorum grant issuance, hardware-backed signer boundaries, and explicit side-effect confirmation/reconciliation while preserving exact decision/input binding and single-use fail-closed semantics.",
+  "evolution": {
+    "consumed_cursor": "next:attenuating_multi_principal_quorum_hardware_backed_signers_provider_confirmation_reconciliation",
+    "candidate_source_sha": "ec2d6688a44018edd712a98be447bf78f5a55699",
+    "workflow_run": 31541877337,
+    "receipt": "machine/evolution-receipts/2026-08-11-multi-principal-quorum.json"
+  },
+  "next_evolution": "Add externally attested hardware provenance and signer/key revocation freshness, persist quorum/provider state safely across restart, and reconcile execution with an external side-effect provider confirmation without weakening exact decision/input/effect binding or single-use semantics.",
   "evidence_refs": [
     "README.md",
     "ISSUE_CONTRACT.md",
     "src/dual_key_fence.py",
+    "src/quorum_fence.py",
     "tests/test_dual_key_fence.py",
+    "tests/test_quorum_fence.py",
     "tests/test_adversarial.py",
     "machine/target-contract.json",
+    "machine/evolution-receipts/2026-08-11-multi-principal-quorum.json",
     "machine/proof_receipt.json",
     "machine/operability_receipt.json",
     "machine/promotion_authority.json"
@@ -63,6 +80,9 @@
     "no Lockheed Martin affiliation",
     "no Lockheed Martin internal architecture claim",
     "not a production actuator-control deployment",
-    "repository relationships do not imply exercised integration"
+    "repository relationships do not imply exercised integration",
+    "hardware_backed is configured provider metadata and not independent physical hardware attestation",
+    "provider confirmation reconciliation currently covers signer authorization rather than external side-effect confirmation",
+    "quorum/provider state is not restart-safe or distributed"
   ]
 }
