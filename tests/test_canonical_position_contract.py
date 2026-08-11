@@ -80,8 +80,14 @@ class CanonicalPositionContractTests(unittest.TestCase):
         self.assertIn("externally attested hardware provenance", POSITION["next_evolution"])
         self.assertIn("external side-effect provider confirmation", POSITION["next_evolution"])
         self.assertIn("no Lockheed Martin affiliation", POSITION["nonclaims"])
-        self.assertIn("not independent physical hardware attestation", " ".join(POSITION["nonclaims"]).lower())
-        self.assertIn("No Lockheed Martin adoption", CAPABILITIES["truth_boundary"])
+        self.assertIn(
+            "not independent physical hardware attestation",
+            " ".join(POSITION["nonclaims"]).lower(),
+        )
+        truth_boundary = CAPABILITIES["truth_boundary"].lower()
+        self.assertIn("lockheed martin adoption", truth_boundary)
+        self.assertIn("no physical hsm/tpm/secure-enclave attestation", truth_boundary)
+        self.assertIn("external side-effect provider confirmation", truth_boundary)
 
 
 if __name__ == "__main__":
