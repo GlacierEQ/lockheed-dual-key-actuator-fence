@@ -9,14 +9,28 @@
     "input-digest-drift-refusal",
     "single-use-grant-replay-refusal",
     "tamper-evident-execution-audit",
-    "deterministic-execution-receipts"
+    "deterministic-execution-receipts",
+    "distinct-principal-quorum",
+    "required-role-quorum",
+    "effect-scope-attenuation",
+    "principal-specific-effect-ceilings",
+    "signer-provider-verification-boundary",
+    "provider-confirmation-reconciliation",
+    "provider-confirmation-revocation-refusal",
+    "provider-confirmation-expiry-refusal",
+    "hardware-backed-provider-policy-boundary",
+    "scoped-quorum-grant-MAC-integrity",
+    "scoped-single-use-execution"
   ],
   "evidence_refs": [
     "src/dual_key_fence.py",
+    "src/quorum_fence.py",
     "tests/test_dual_key_fence.py",
+    "tests/test_quorum_fence.py",
     "tests/test_adversarial.py",
+    "machine/evolution-receipts/2026-08-11-multi-principal-quorum.json",
     "machine/proof_receipt.json",
     "machine/canonical-position.json"
   ],
-  "truth_boundary": "Repository-local dual-control authority mechanisms only. No Lockheed Martin adoption, production actuator deployment, or exercised integration with sibling repositories is implied."
+  "truth_boundary": "Repository-local dual-control and multi-principal authority mechanisms only. The signer-provider interface can enforce provider-declared hardware-backed requirements, but no physical HSM/TPM/secure-enclave attestation, Lockheed Martin adoption, production actuator deployment, external side-effect provider confirmation, restart-safe quorum persistence, distributed quorum coordination, or exercised sibling-repository integration is implied."
 }
