@@ -1,0 +1,37 @@
+{
+  "schema": "glaciereq.repo-evolution-receipt.v1",
+  "repository": "GlacierEQ/lockheed-dual-key-actuator-fence",
+  "consumed_cursor": "next:attenuating_multi_principal_quorum_hardware_backed_signers_provider_confirmation_reconciliation",
+  "candidate_source_sha": "ec2d6688a44018edd712a98be447bf78f5a55699",
+  "workflow_run": 31541877337,
+  "python": "PASS",
+  "implemented": [
+    "legacy single-issuer dual-key path preserved unchanged",
+    "distinct-principal quorum with required-role constraints",
+    "effect authority that may attenuate but cannot expand beyond policy or principal ceilings",
+    "signer-provider integration contract with signature verification",
+    "provider confirmation reconciliation before quorum grant issuance",
+    "provider confirmation revocation and expiry refusal independent of signature validity",
+    "optional hardware-backed signer policy enforced against provider descriptor metadata",
+    "decision input effect approval and confirmation fingerprints bound into short-lived quorum grants",
+    "single-use scoped execution with decision input scope MAC expiry and replay refusal"
+  ],
+  "adversarial_proof": [
+    "duplicate approvals from one principal cannot inflate quorum",
+    "operator role cannot substitute for required safety role",
+    "effect scope cannot expand during approval grant issuance or execution",
+    "tampered approval signatures fail before quorum",
+    "revoked and expired provider confirmations fail even when the underlying signature remains valid",
+    "software reference signer is rejected when a principal policy requires hardware-backed provider metadata",
+    "test-only hardware-provider implementation exercises the provider contract without claiming physical attestation",
+    "input drift grant expiry and grant replay fail closed"
+  ],
+  "truth_boundaries": [
+    "the repository defines and enforces a signer-provider integration contract but does not independently attest physical HSM TPM or secure-enclave hardware",
+    "hardware_backed is trusted provider integration metadata rather than external hardware provenance proof",
+    "provider confirmation reconciliation currently covers signer authorization not an external side-effect provider confirmation",
+    "quorum and provider state are in-memory reference state and are not restart safe or distributed",
+    "no Lockheed Martin affiliation adoption production actuator deployment proprietary access or internal architecture knowledge is claimed"
+  ],
+  "next_cursor": "next:externally_attested_hardware_provenance_signer_key_revocation_freshness_restart_safe_quorum_state_and_external_side_effect_confirmation_reconciliation"
+}
