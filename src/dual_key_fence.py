@@ -1,4 +1,3 @@
-
 """Dual-key actuator fence — policy brain ≠ actuator muscle.
 
 Leveled (L1): thread-safe single-execution, audit log, skew window,
@@ -16,9 +15,9 @@ import hmac
 import json
 import threading
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Mapping
 
 
 class Decision(str, Enum):
@@ -37,6 +36,7 @@ class RefuseReason(str, Enum):
     BAD_MAC = "BAD_MAC"
     AUDIT_TAMPER = "AUDIT_TAMPER"
     CLOCK_SKEW = "CLOCK_SKEW"
+    SIDE_EFFECT_ERROR = "SIDE_EFFECT_ERROR"
 
 
 def canonical_digest(payload: Mapping[str, Any]) -> str:
@@ -84,7 +84,7 @@ class ExecutionReceipt:
     decision_id: str
     grant_id: str
     input_digest: str
-    outcome: str  # EXECUTED | REFUSED
+    outcome: str  # EXECUTED | REFUSED | INDETERMINATE
     refuse_reason: str | None
     executed_at: float
     result_digest: str | None
@@ -152,7 +152,6 @@ class AuditLog:
         return len(self._entries)
 
     def __bool__(self) -> bool:
-        # Prevent empty logs from being treated as falsy by `x or default`.
         return True
 
     @property
@@ -173,7 +172,6 @@ class PolicyBrain:
         self._allow = allow_predicate
         self._seq = 0
         self._lock = threading.Lock()
-        # Note: empty AuditLog is falsy via __len__; never use `audit or ...`
         self.audit = AuditLog() if audit is None else audit
 
     def decide(self, inputs: Mapping[str, Any], now: float | None = None) -> PolicyDecision:
@@ -220,6 +218,9 @@ class GrantIssuer:
         if decision.verdict is not Decision.ALLOW:
             self.audit.append("GRANT_SKIP", {"decision_id": decision.decision_id, "reason": "POLICY_REFUSE"})
             return None
+        if not self.audit.verify_chain():
+            self.audit.append("GRANT_SKIP", {"decision_id": decision.decision_id, "reason": "AUDIT_TAMPER"})
+            return None
         t = time.time() if now is None else now
         with self._lock:
             self._seq += 1
@@ -240,7 +241,8 @@ class GrantIssuer:
 class ActuatorMuscle:
     """Executes only with a live, MAC-valid grant bound to the same decision + inputs.
 
-    Thread-safe: a grant can execute at most once across concurrent callers.
+    A grant is consumed before side-effect invocation and is never released after invocation
+    begins. This prevents duplicate actuation when an effect partially succeeds and then raises.
     """
 
     def __init__(self, issuer: GrantIssuer, skew_s: float = 0.05, audit: AuditLog | None = None):
@@ -269,12 +271,21 @@ class ActuatorMuscle:
 
             def refuse(reason: RefuseReason) -> ExecutionReceipt:
                 rec = ExecutionReceipt(
-                    rid, decision.decision_id, grant.grant_id if grant else "",
-                    digest, "REFUSED", reason.value, t, None, audit_seq,
+                    rid,
+                    decision.decision_id,
+                    grant.grant_id if grant else "",
+                    digest,
+                    "REFUSED",
+                    reason.value,
+                    t,
+                    None,
+                    audit_seq,
                 )
                 self.audit.append("REFUSE", {"receipt": rid, "reason": reason.value})
                 return rec
 
+            if not self.audit.verify_chain():
+                return refuse(RefuseReason.AUDIT_TAMPER)
             if decision.verdict is not Decision.ALLOW:
                 return refuse(RefuseReason.POLICY_REFUSE)
             if grant is None:
@@ -292,37 +303,50 @@ class ActuatorMuscle:
             if grant.grant_id in self._executed:
                 return refuse(RefuseReason.ALREADY_EXECUTED)
 
-            # claim grant before side effect to prevent double execution
             self._executed.add(grant.grant_id)
+            self.audit.append("ACTUATION_BEGIN", {"receipt": rid, "grant_id": grant.grant_id})
 
-        # side effect outside decision lock? keep under lock for strict single-thread sim purity
-        # re-enter: execute under lock for deterministic single-process semantics
-        with self._lock:
-            try:
-                result = side_effect(inputs)
-            except Exception as exc:  # noqa: BLE001 — surface as refused execution
-                self._executed.discard(grant.grant_id)
-                rec = ExecutionReceipt(
-                    rid, decision.decision_id, grant.grant_id, digest,
-                    "REFUSED", f"SIDE_EFFECT_ERROR:{type(exc).__name__}", t, None, audit_seq,
-                )
-                self.audit.append("SIDE_EFFECT_ERROR", {"receipt": rid, "err": type(exc).__name__})
-                return rec
-
-            if isinstance(result, Mapping):
-                result_digest = canonical_digest(dict(result))
-            else:
-                result_digest = hashlib.sha256(repr(result).encode()).hexdigest()
-
+        try:
+            result = side_effect(inputs)
+        except Exception as exc:  # noqa: BLE001
             rec = ExecutionReceipt(
-                rid, decision.decision_id, grant.grant_id, digest,
-                "EXECUTED", None, t, result_digest, audit_seq,
+                rid,
+                decision.decision_id,
+                grant.grant_id,
+                digest,
+                "INDETERMINATE",
+                f"{RefuseReason.SIDE_EFFECT_ERROR.value}:{type(exc).__name__}",
+                t,
+                None,
+                audit_seq,
             )
             self.audit.append(
-                "EXECUTE",
-                {"receipt": rid, "grant_id": grant.grant_id, "result_digest": result_digest},
+                "ACTUATION_INDETERMINATE",
+                {"receipt": rid, "grant_id": grant.grant_id, "err": type(exc).__name__},
             )
             return rec
+
+        if isinstance(result, Mapping):
+            result_digest = canonical_digest(dict(result))
+        else:
+            result_digest = hashlib.sha256(repr(result).encode()).hexdigest()
+
+        rec = ExecutionReceipt(
+            rid,
+            decision.decision_id,
+            grant.grant_id,
+            digest,
+            "EXECUTED",
+            None,
+            t,
+            result_digest,
+            audit_seq,
+        )
+        self.audit.append(
+            "EXECUTE",
+            {"receipt": rid, "grant_id": grant.grant_id, "result_digest": result_digest},
+        )
+        return rec
 
     def executed_grants(self) -> frozenset[str]:
         with self._lock:
