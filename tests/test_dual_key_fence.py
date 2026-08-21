@@ -1,4 +1,3 @@
-
 """Leveled tests: refuse matrix, concurrency, audit integrity, fingerprints."""
 from __future__ import annotations
 
@@ -66,9 +65,7 @@ class DualKeyLeveledTests(unittest.TestCase):
         d = self.brain.decide(self.inputs, now=1000.0)
         g = self.issuer.issue(d, now=1000.0)
         assert g is not None
-        tampered = type(g)(
-            g.grant_id, g.decision_fingerprint, g.input_digest, g.not_before, g.not_after, "0" * 64
-        )
+        tampered = type(g)(g.grant_id, g.decision_fingerprint, g.input_digest, g.not_before, g.not_after, "0" * 64)
         r = self.muscle.execute(d, tampered, self.inputs, lambda i: 1, now=1001.0)
         self.assertEqual(r.refuse_reason, RefuseReason.BAD_MAC.value)
 
@@ -98,19 +95,24 @@ class DualKeyLeveledTests(unittest.TestCase):
         self.assertEqual(results.count("EXECUTED"), 1)
         self.assertEqual(results.count("REFUSED"), 15)
 
-    def test_side_effect_exception_refuses_and_releases_grant(self) -> None:
+    def test_side_effect_exception_consumes_grant_and_blocks_retry(self) -> None:
         d = self.brain.decide(self.inputs, now=1000.0)
         g = self.issuer.issue(d, now=1000.0)
+        calls = []
 
-        def boom(_i):
-            raise RuntimeError("boom")
+        def partial_then_boom(i):
+            calls.append(i["n"])
+            raise RuntimeError("boom-after-partial-effect")
 
-        r = self.muscle.execute(d, g, self.inputs, boom, now=1001.0)
-        self.assertEqual(r.outcome, "REFUSED")
-        self.assertIn("SIDE_EFFECT_ERROR", r.refuse_reason or "")
-        # grant released for retry after failure
-        r2 = self.muscle.execute(d, g, self.inputs, lambda i: 1, now=1001.0)
-        self.assertEqual(r2.outcome, "EXECUTED")
+        r = self.muscle.execute(d, g, self.inputs, partial_then_boom, now=1001.0)
+        self.assertEqual(r.outcome, "INDETERMINATE")
+        self.assertIn(RefuseReason.SIDE_EFFECT_ERROR.value, r.refuse_reason or "")
+        self.assertEqual(calls, [1])
+
+        r2 = self.muscle.execute(d, g, self.inputs, lambda i: calls.append(999), now=1001.0)
+        self.assertEqual(r2.outcome, "REFUSED")
+        self.assertEqual(r2.refuse_reason, RefuseReason.ALREADY_EXECUTED.value)
+        self.assertEqual(calls, [1])
 
     def test_audit_chain_verifies(self) -> None:
         d = self.brain.decide(self.inputs, now=1000.0)
@@ -122,9 +124,24 @@ class DualKeyLeveledTests(unittest.TestCase):
     def test_audit_tamper_detected(self) -> None:
         d = self.brain.decide(self.inputs, now=1000.0)
         self.issuer.issue(d, now=1000.0)
-        # mutate payload without resealing
-        self.audit._entries[0].payload["evil"] = True  # noqa: SLF001 — intentional tamper test
+        self.audit._entries[0].payload["evil"] = True  # noqa: SLF001
         self.assertFalse(self.audit.verify_chain())
+
+    def test_audit_tamper_blocks_execution_before_side_effect(self) -> None:
+        d = self.brain.decide(self.inputs, now=1000.0)
+        g = self.issuer.issue(d, now=1000.0)
+        assert g is not None
+        self.audit._entries[0].payload["evil"] = True  # noqa: SLF001
+        called = []
+        r = self.muscle.execute(d, g, self.inputs, lambda i: called.append(i), now=1001.0)
+        self.assertEqual(r.outcome, "REFUSED")
+        self.assertEqual(r.refuse_reason, RefuseReason.AUDIT_TAMPER.value)
+        self.assertEqual(called, [])
+
+    def test_audit_tamper_blocks_new_grant(self) -> None:
+        d = self.brain.decide(self.inputs, now=1000.0)
+        self.audit._entries[0].payload["evil"] = True  # noqa: SLF001
+        self.assertIsNone(self.issuer.issue(d, now=1000.0))
 
     def test_digest_order_independence(self) -> None:
         a = canonical_digest({"b": 1, "a": 2})
